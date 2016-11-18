@@ -1,0 +1,135 @@
+#' Change Directory
+#'
+#' A simple function for changing directory
+#'
+#' @param dir the name of the file path
+#'
+#' @return Nothing is returned
+#'
+#' @examples
+#' changeDir(dir = "C:/user/myDocuments")
+#'
+#' @export
+changeDir <- function(dir) {
+  setwd(dir)
+}
+
+
+#' Check packages
+#'
+#' This function checks if the local copy of R has the dependent packakges
+#' installed. If they are available, they will be attached. If the packages are
+#' missing, this function installs them.
+#'
+#'
+#' @examples
+#' check_pkgs()
+#'
+#' @export
+check_pkgs <- function() {
+
+  if(!require(tidyr)) {
+    message("installing the 'tidyr' package")
+    install.packages("tidyr")
+  }
+  if(!require(data.table)) {
+    message("installing the 'data.table' package")
+    install.packages("data.table")
+  }
+
+}
+
+#' Convert Trax File
+#'
+#' This is function converts Trax files to the wide format for use with
+#' Power BI.
+#'
+#' @param filename the name along with the file path for the data
+#' @param dir defaulted to the current working directory. This is the target
+#' directory for your files.
+#'
+#' @importFrom tidyr spread
+#' @importFrom data.table as.data.table
+#'
+#' @return returns a formatted file in your given location.
+#'
+#' @examples
+#' convertTrax("M:/All Services Visualisation/Trax files to be converted/Files/TV Programming Intelligence Trax.csv")
+#'
+#' @export
+convertTraxFile <- function(filename, dir = getwd()) {
+  # check package dependencies
+  check_pkgs()
+
+  # read data
+  data <- read.csv(filename, skip = 13, stringsAsFactors = FALSE, encoding = "UTF-8")
+
+  # create dates from periods
+  data$PeriodActual <- sapply(data$PeriodCode, function(x){
+    if (!is.na(strsplit(x, "Y")[[1]][2])) {
+      paste0("31/12/", strsplit(x, "Y")[[1]][2])
+    }
+    else {
+      y <- strsplit(x, "-")
+      if (y[[1]][1] == "Q1") {
+        paste0("31/3/20", y[[1]][2])
+      }
+      else if (y[[1]][1] == "Q2") {
+        paste0("31/6/20", y[[1]][2])
+      }
+      else if (y[[1]][1] == "Q3") {
+        paste0("31/9/20", y[[1]][2])
+      }
+      else {
+        paste0("31/12/20", y[[1]][2])
+      }
+    }
+  })
+
+  data_unique <- unique(data)
+
+  keys <- colnames(data_unique)[!grepl('Value',colnames(data_unique))]
+
+  # Removes duplicate values
+  data_unique <- data.table::as.data.table(data_unique)
+
+  # sum repeat entries
+  data_unique <- data_unique[,list(Value= sum(Value)),keys]
+
+  # spread data to wide format
+  alg_spread <- tidyr::spread(data_unique, key = Measure, value = Value)
+
+  # Create file name and save file
+  file_name <- strsplit(filename, "/")[[1]]
+  name <- file_name[length(file_name)]
+  name <- paste0("formatted - ", name)
+  dir_name <- paste0(dir, "/", name)
+  # write file
+  write.csv(file = dir_name, x = alg_spread)
+
+}
+
+#' Convert All Trax Files
+#'
+#' This is function file handler is for converting all files in the
+#' given directory.
+#'
+#' @inheritParams changeDir
+#'
+#' @importFrom tidyr spread
+#' @importFrom data.table as.data.table
+#'
+#' @return returns a formatted version of all the files in the directory
+#'
+#' @examples
+#' convertTrax("M:/All Services Visualisation/Trax files to be converted/Files/TV Programming Intelligence Trax.csv")
+#'
+#' @export
+convertAll <- function(dir) {
+  setwd(dir)
+  files <- list.files()
+
+  for (i in 1:length(files)) {
+    convertTrax(files[i])
+  }
+}

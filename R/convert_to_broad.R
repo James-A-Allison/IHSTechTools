@@ -7,7 +7,7 @@
 #' @return Nothing is returned
 #'
 #' @examples
-#' changeDir(dir = "C:/user/myDocuments")
+#' changeDir(dir = getwd())
 #'
 #' @export
 changeDir <- function(dir) {
@@ -48,13 +48,9 @@ check_pkgs <- function() {
 #' @param dir defaulted to the current working directory. This is the target
 #' directory for your files.
 #'
-#' @importFrom tidyr spread
-#' @importFrom data.table as.data.table
 #'
 #' @return returns a formatted file in your given location.
 #'
-#' @examples
-#' convertTrax("M:/All Services Visualisation/Trax files to be converted/Files/TV Programming Intelligence Trax.csv")
 #'
 #' @export
 convertTraxFile <- function(filename, dir = getwd()) {
@@ -116,13 +112,9 @@ convertTraxFile <- function(filename, dir = getwd()) {
 #'
 #' @inheritParams changeDir
 #'
-#' @importFrom tidyr spread
-#' @importFrom data.table as.data.table
 #'
 #' @return returns a formatted version of all the files in the directory
 #'
-#' @examples
-#' convertTrax("M:/All Services Visualisation/Trax files to be converted/Files/TV Programming Intelligence Trax.csv")
 #'
 #' @export
 convertAll <- function(dir) {

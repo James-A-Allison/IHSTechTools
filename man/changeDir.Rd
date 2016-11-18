@@ -16,7 +16,7 @@ Nothing is returned
 A simple function for changing directory
 }
 \examples{
-changeDir(dir = "C:/user/myDocuments")
+changeDir(dir = getwd())
 
 }
 

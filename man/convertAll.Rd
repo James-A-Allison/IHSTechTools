@@ -16,8 +16,4 @@ returns a formatted version of all the files in the directory
 This is function file handler is for converting all files in the
 given directory.
 }
-\examples{
-convertTrax("M:/All Services Visualisation/Trax files to be converted/Files/TV Programming Intelligence Trax.csv")
-
-}
 

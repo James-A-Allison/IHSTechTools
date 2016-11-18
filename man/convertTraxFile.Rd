@@ -19,8 +19,4 @@ returns a formatted file in your given location.
 This is function converts Trax files to the wide format for use with
 Power BI.
 }
-\examples{
-convertTrax("M:/All Services Visualisation/Trax files to be converted/Files/TV Programming Intelligence Trax.csv")
-
-}
 

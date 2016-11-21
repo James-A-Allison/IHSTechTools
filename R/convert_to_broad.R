@@ -71,10 +71,10 @@ convertTraxFile <- function(filename, dir = getwd()) {
         paste0("31/3/20", y[[1]][2])
       }
       else if (y[[1]][1] == "Q2") {
-        paste0("31/6/20", y[[1]][2])
+        paste0("30/6/20", y[[1]][2])
       }
       else if (y[[1]][1] == "Q3") {
-        paste0("31/9/20", y[[1]][2])
+        paste0("30/9/20", y[[1]][2])
       }
       else {
         paste0("31/12/20", y[[1]][2])
@@ -122,6 +122,6 @@ convertAll <- function(dir) {
   files <- list.files()
 
   for (i in 1:length(files)) {
-    convertTrax(files[i])
+    convertTraxFile(files[i], dir)
   }
 }

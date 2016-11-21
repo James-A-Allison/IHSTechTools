@@ -123,5 +123,6 @@ convertAll <- function(dir = getwd(), dest) {
 
   for (i in 1:length(files)) {
     convertTraxFile(files[i], dest)
+
   }
 }

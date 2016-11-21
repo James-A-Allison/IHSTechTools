@@ -117,11 +117,11 @@ convertTraxFile <- function(filename, dir = getwd()) {
 #'
 #'
 #' @export
-convertAll <- function(dir) {
+convertAll <- function(dir = getwd(), dest) {
   setwd(dir)
   files <- list.files()
 
   for (i in 1:length(files)) {
-    convertTraxFile(files[i], dir)
+    convertTraxFile(files[i], dest)
   }
 }

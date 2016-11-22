@@ -4,7 +4,7 @@
 \alias{convertAll}
 \title{Convert All Trax Files}
 \usage{
-convertAll(dir)
+convertAll(dir = getwd(), dest)
 }
 \arguments{
 \item{dir}{the name of the file path}

@@ -1,0 +1,19 @@
+---
+title: "Using IHS Tech Tools"
+author: "Christopher Hughes"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+This vignette is a walkthrough guide on how to use the functions included in the IHS Tech Tools package. These include:
+
+- Converting Trax files for use with Power BI
+- Accessing and using the Tech database
+- And many more...
+
+> "It's early days so if I've screwed up follow the link and complain"
+([via](https://github.com/ch4413/IHSTechTools))

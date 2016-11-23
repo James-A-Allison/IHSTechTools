@@ -4,7 +4,8 @@
 \alias{changeDir}
 \title{Change Directory}
 \usage{
-changeDir(dir)
+
+  changeDir(dir = "M:/All Services Visualisation/Trax files to be converted/Files")
 }
 \arguments{
 \item{dir}{the name of the file path}

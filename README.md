@@ -35,8 +35,17 @@ check_pkgs()
 ```
 Once we've got all of the right packages installed and up to date, we'll need to decide where we're working. Use changeDir to move to the directory you wish to create your files in, where path is your directory path:
 
-changeDir(path)
+```
+# Use changeDir(path) if your files are not in the default directory, where
+# path is the location of your directory
 
-Now we're ready to go! Use the other functions as described in the vignette...
+changeDir()
 
-system.file("extdata", "response.json", package = "IHSTechTools")
+```
+
+Now we're ready to go! Use the other functions as described in the vignette or just try out the command below if you're working from the default directory:
+
+```
+convertTraxFile("TV Programming Intelligence Trax.csv")
+```
+

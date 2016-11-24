@@ -6,3 +6,5 @@ export(convertAll)
 export(convertTraxFile)
 export(createPath)
 export(quarter_to_date)
+
+import(data.table)

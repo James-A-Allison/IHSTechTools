@@ -15,6 +15,7 @@ check_pkg_ghit <- function() {
   if(!require(ghit)) {
     message("installing the 'ghit' package")
     install.packages("ghit")
+    require(ghit)
   }
 }
 

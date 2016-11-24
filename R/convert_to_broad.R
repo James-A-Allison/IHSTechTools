@@ -103,7 +103,7 @@ convertTraxFile <- function(filename, dir = getwd()) {
 
   dir_name <-createPath(filename, dir)
   write.csv(file = dir_name, x = test_spread)
-
+  print(message(paste("Formatted file written in: ", dir)))
 }
 
 #' Create Converted File Name

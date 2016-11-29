@@ -12,16 +12,16 @@ To install IHS Tech Tools you'll need ghit's help. Run the script below install 
 
 ```
 check_pkg_ghit <- function() {
-  if(!require(ghit)) {
-    message("installing the 'ghit' package")
-    install.packages("ghit")
-    require(ghit)
+  if(!require(devtools)) {
+    message("installing the 'devtools' package")
+    install.packages("devtools")
+    require(devtools)
   }
 }
 
 check_pkg_ghit()
 
-ghit::install_github("ch4413/IHSTechTools")
+devtools::install_github("ch4413/IHSTechTools")
 library(IHSTechTools)
 ls("package:IHSTechTools")
 

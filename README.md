@@ -1,5 +1,7 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/hm2a822s7vd933u7?svg=true)](https://ci.appveyor.com/project/ch4413/ihstechtools)
 
+[![Build Status](https://travis-ci.org/ch4413/IHSTechTools.svg?branch=master)](https://travis-ci.org/ch4413/IHSTechTools)
+
 IHSTechTools
 ================
 Christopher Hughes

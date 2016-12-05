@@ -30,15 +30,14 @@ changeDir <- function(dir = "M:/All Services Visualisation/Trax files to be conv
 #' @export
 check_pkgs <- function() {
 
-  if(!require(tidyr)) {
+  if(!requireNamespace("tidyr")) {
     message("installing the 'tidyr' package")
     install.packages("tidyr")
   }
-  if(!require(data.table)) {
+  if(!requireNamespace("data.table")) {
     message("installing the 'data.table' package")
     install.packages("data.table")
-  }
-
+    }
 }
 
 #' Convert Trax File
@@ -135,6 +134,7 @@ createPath <- function(filename, dir) {
 #' given directory.
 #'
 #' @inheritParams changeDir
+#' @param dest The path where your converted files will be saved.
 #'
 #'
 #' @return returns a formatted version of all the files in the directory

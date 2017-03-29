@@ -13,7 +13,7 @@ Maintainer: Christopher Hughes <christopher.hughes@ihsmarkit.com>
 Description: This package includes tools for: Converting Trax files for working with PowerBI, Accessing the MySQL Tech database, TBC.
 License: GPL (>= 2)
 LazyData: TRUE
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
 URL: https://github.com/ch4413/IHSTechTools
 VignetteBuilder: knitr
 encoding: latin1

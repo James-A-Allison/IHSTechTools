@@ -19,4 +19,3 @@ This function will only run if you are in the package.
 \dontrun{add_new_groupings()}
 
 }
-

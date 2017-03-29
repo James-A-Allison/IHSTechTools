@@ -21,4 +21,3 @@ alternative groupings to be used.
 \dontrun{alternative_groupings()}
 
 }
-

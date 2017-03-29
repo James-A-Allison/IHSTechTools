@@ -28,4 +28,3 @@ Data table for spreading the Trax files
 }
 }
 \keyword{datasets}
-

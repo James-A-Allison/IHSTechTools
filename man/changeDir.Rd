@@ -14,10 +14,10 @@
 Nothing is returned
 }
 \description{
-A simple function for changing directory
+A simple function for changing directory.
+I am adding a test text line
 }
 \examples{
 changeDir(dir = getwd())
 
 }
-

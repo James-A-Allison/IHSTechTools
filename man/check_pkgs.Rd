@@ -15,4 +15,3 @@ missing, this function installs them.
 check_pkgs()
 
 }
-

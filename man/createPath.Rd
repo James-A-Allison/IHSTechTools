@@ -18,4 +18,3 @@ returns full path of directory and file name for saving
 This is function creates a file name with the pre-fix "formatted - "
 for passing to the file writing function
 }
-

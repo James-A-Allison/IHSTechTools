@@ -19,4 +19,3 @@ returns a formatted file in your given location.
 This is function converts Trax files to the wide format for use with
 Power BI.
 }
-

@@ -17,4 +17,3 @@ data frame.
 This is a function for converting the Trax quarter format to a date of the
 form dd/mm/yyyy.
 }
-

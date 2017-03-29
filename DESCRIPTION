@@ -6,7 +6,7 @@ Date: 2016-11-18
 Depends: R (>= 3.2.0), data.table
 Suggests: tidyr,
     knitr,
-    rmarkdown, devtools
+    rmarkdown, devtools, dplyr
 Imports: RMySQL, utils
 Author: Christopher Hughes <christopher.hughes@ihsmarkit.com>
 Maintainer: Christopher Hughes <christopher.hughes@ihsmarkit.com>

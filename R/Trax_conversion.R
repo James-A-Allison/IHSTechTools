@@ -1,7 +1,6 @@
 #' Change Directory
 #'
 #' A simple function for changing directory.
-#' I am adding a test text line
 #'
 #' @param dir the name of the file path
 #'
@@ -38,7 +37,12 @@ check_pkgs <- function() {
   if(!requireNamespace("data.table")) {
     message("installing the 'data.table' package")
     install.packages("data.table")
-    }
+  }
+  if(!requireNamespace("dplyr")) {
+    message("installing the 'dplyr' package")
+    install.packages("dplyr")
+  }
+
 }
 
 #' Convert Trax File
@@ -60,6 +64,7 @@ convertTraxFile <- function(filename, dir = getwd()) {
   check_pkgs()
   data <- read.csv(filename, skip = 13, stringsAsFactors = FALSE, encoding = "UTF-8")
 
+  data$Measure <- gsub(pattern = "â€“", replacement = "-", x = data$Measure)
   # create dates from periods - needs to be made into a function
   data$PeriodActual <- sapply(data$PeriodCode, function(x){
     if (!is.na(strsplit(x, "Y")[[1]][2])) {
@@ -89,9 +94,11 @@ convertTraxFile <- function(filename, dir = getwd()) {
   # sum repeat entries
   data_unique <- data_unique[,list(Value= sum(Value)),keys]
 
-
   # spread data to wide format
-  test <- merge(data_unique, groupings, by.x = "Measure", by.y = "Measure")
+  #test <- merge(data_unique, groupings, by.x = "Measure", by.y = "Measure")
+  #data_unique$Measure <- as.factor(data_unique$Measure)
+  groupings$Measure <- as.character(groupings$Measure)
+  test <- dplyr::left_join(data_unique, groupings, by = c("Measure" = "Measure"))
   test_spread <- tidyr::spread(test, key = Value_Field, value = Value, fill = 0)
 
   # Apply multiplier

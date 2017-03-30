@@ -155,7 +155,7 @@ convertAll <- function(dir = getwd(), dest) {
   files <- list.files()
 
   for (i in 1:length(files)) {
-    convertTraxFile(files[i], dest)
+    convertTraxFileBeta(files[i], dest)
 
   }
 }

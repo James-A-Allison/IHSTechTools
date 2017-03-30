@@ -10,7 +10,7 @@ alternative_groupings(file)
 \item{file}{csv format file (with path) that you wish to use for Trax files groupings}
 }
 \value{
-Nothing is returned
+Nothing is returned but global variable of groupings created
 }
 \description{
 A function used for overriding the internal package data "groupings" with your own

@@ -28,15 +28,15 @@ add_new_groupings <- function() {
 #'
 #' @param file  csv format file (with path) that you wish to use for Trax files groupings
 #'
-#' @return Nothing is returned
+#' @return Nothing is returned but global variable of groupings created
 #'
 #' @examples
 #' \dontrun{alternative_groupings()}
 #'
 #' @export
 alternative_groupings <- function(file) {
-
-  assign(x = "groupings", value = file)
+  data <- read.csv(file)
+  assign(x = "groupings", value = data, envir = globalenv())
 
 }
 

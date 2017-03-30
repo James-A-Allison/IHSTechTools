@@ -12,7 +12,7 @@
 #' @export
 changeDir <- function(dir = "M:/All Services Visualisation/Trax files to be converted/Files") {
   setwd(dir)
-  message("Convert one of the files listed below using convertTraxFile or convertAll")
+  message("Convert one of the files listed below using convertTraxFileBeta or convertAll")
   list.files()
 }
 

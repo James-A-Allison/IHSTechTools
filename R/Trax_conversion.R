@@ -64,7 +64,7 @@ convertTraxFile <- function(filename, dir = getwd()) {
   check_pkgs()
   data <- read.csv(filename, skip = 13, stringsAsFactors = FALSE, encoding = "UTF-8")
 
-  data$Measure <- gsub(pattern = "â€“", replacement = "-", x = data$Measure)
+  #data$Measure <- gsub(pattern = "â€“", replacement = "-", x = data$Measure)
   # create dates from periods - needs to be made into a function
   data$PeriodActual <- sapply(data$PeriodCode, function(x){
     if (!is.na(strsplit(x, "Y")[[1]][2])) {
@@ -97,7 +97,7 @@ convertTraxFile <- function(filename, dir = getwd()) {
   # spread data to wide format
   #test <- merge(data_unique, groupings, by.x = "Measure", by.y = "Measure")
   #data_unique$Measure <- as.factor(data_unique$Measure)
-  groupings$Measure <- as.character(groupings$Measure)
+  #groupings$Measure <- stringi::stri_conv(as.character(groupings$Measure), from = ""
   test <- dplyr::left_join(data_unique, groupings, by = c("Measure" = "Measure"))
   test_spread <- tidyr::spread(test, key = Value_Field, value = Value, fill = 0)
 
@@ -197,4 +197,73 @@ quarter_to_date <- function(data) {
     }
   })
   data
+}
+
+#' Convert Trax File without encoding
+#'
+#' This is function converts Trax files to the wide format for use with
+#' Power BI.
+#'
+#' @param filename the name along with the file path for the data
+#' @param dir defaulted to the current working directory. This is the target
+#' directory for your files.
+#'
+#'
+#' @return returns a formatted file in your given location.
+#'
+#'
+#' @export
+convertTraxFileBeta <- function(filename, dir = getwd()) {
+
+  check_pkgs()
+  data <- read.csv(filename, skip = 13, stringsAsFactors = FALSE)#, encoding = "UTF-8")
+
+  data$Measure <- gsub(pattern = "â€“", replacement = "-", x = data$Measure)
+  # create dates from periods - needs to be made into a function
+  data$PeriodActual <- sapply(data$PeriodCode, function(x){
+    if (!is.na(strsplit(x, "Y")[[1]][2])) {
+      paste0("31/12/", strsplit(x, "Y")[[1]][2])
+    }
+    else {
+      y <- strsplit(x, "-")
+      if (y[[1]][1] == "Q1") {
+        paste0("31/3/20", y[[1]][2])
+      }
+      else if (y[[1]][1] == "Q2") {
+        paste0("30/6/20", y[[1]][2])
+      }
+      else if (y[[1]][1] == "Q3") {
+        paste0("30/9/20", y[[1]][2])
+      }
+      else {
+        paste0("31/12/20", y[[1]][2])
+      }
+    }
+  })
+
+  data_unique <- unique(data)
+  keys <- colnames(data_unique)[!grepl('Value',colnames(data_unique))]
+  # Removes duplicate values
+  data_unique <- data.table::as.data.table(data_unique)
+  # sum repeat entries
+  data_unique <- data_unique[,list(Value= sum(Value)),keys]
+
+  # spread data to wide format
+  #test <- merge(data_unique, groupings, by.x = "Measure", by.y = "Measure")
+  #data_unique$Measure <- as.factor(data_unique$Measure)
+  #groupings$Measure <- stringi::stri_conv(as.character(groupings$Measure), from = ""
+  test <- dplyr::left_join(data_unique, groupings, by = c("Measure" = "Measure"))
+  test_spread <- tidyr::spread(test, key = Value_Field, value = Value, fill = 0)
+
+  # Apply multiplier
+  v <- which(names(test_spread) == "Multiplier")
+  columns <- c((v+1):length(names(test_spread)))
+  c <- names(test_spread)[columns]
+  class(test_spread) <- "data.frame"
+  test_spread[c] <- test_spread[c] * test_spread$Multiplier
+  test_spread$Multiplier <- NULL
+
+  dir_name <-createPath(filename, dir)
+  write.csv(file = dir_name, x = test_spread)
+  cat(message(paste("Formatted file written in: ", dir)))
 }

@@ -1,4 +1,4 @@
-#' Add new groupings data
+#' Update Groupings data
 #'
 #' A function used for editing the internal package data "groupings".
 #' When run, you will be prompted to give the file which you wish to
@@ -9,10 +9,10 @@
 #' @return Nothing is returned
 #'
 #' @examples
-#' \dontrun{add_new_groupings()}
+#' \dontrun{update_groupings()}
 #'
 #' @export
-add_new_groupings <- function() {
+update_groupings <- function() {
 
   filepath <- file.choose()
   groupings <- read.csv(filepath)
